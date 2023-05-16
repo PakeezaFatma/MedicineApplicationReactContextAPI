@@ -1,23 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
 
+
+import { useContext } from 'react';
+import Cart from './component/Cart/Cart';
+import FormUnp from './component/Form/FormUnp';
+import ShowMed from './component/ShowMed/ShowMed';
+import { MedContext } from './component/Store/Context';
 function App() {
+  const showCart1=useContext(MedContext);
+
+  const showCartItem=()=>{
+    showCart1.SetShowCart()
+    console.log(showCart1);
+
+  }
+  let count=0;
+        
+  showCart1.CartData.forEach((e) => {
+    count++;
+  });
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <FormUnp/>
+      <button onClick={showCartItem }>Cart  {  count}</button>
+      <ShowMed/>
+      {showCart1.ShowCart && <Cart/>}
     </div>
   );
 }
